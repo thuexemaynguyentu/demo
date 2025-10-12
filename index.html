@@ -10,183 +10,147 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
-:root{
-  --primary:#d60000; /* Honda đỏ */
-  --secondary:#000;
+:root {
+  --primary:#FF0000;    /* Honda đỏ */
+  --secondary:#000;     
   --bg:#fff;
-  --accent:#fff;
+  --accent:#FFCC00;     /* vàng Honda */
 }
 
-*{box-sizing:border-box;}
-body{
-  margin:0;
-  font-family: 'Arial', sans-serif;
-  background:#fff;
+/* Toàn trang */
+html, body {
+  margin:0; padding:0;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+  background: linear-gradient(135deg,#FF0000,#000,#FFCC00,#FF0000);
+  background-size: 400% 400%;
+  animation: gradientBG 20s ease infinite;
   color: var(--secondary);
-  overflow-x:hidden;
 }
 
-/* Topbar */
-.top-bar{
-  background: rgba(0,0,0,0.7);
-  color: var(--accent);
-  padding:0.4rem 1rem;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-size:0.9rem;
-  position:fixed;
-  width:100%;
-  z-index:1000;
+@keyframes gradientBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
-.top-bar button{margin-left:5px; border-radius:20px; font-weight:bold; transition:0.3s;}
-.top-bar button:hover{transform:scale(1.1);}
 
 /* Navbar */
-.navbar{
-  background: rgba(0,0,0,0.8);
+.navbar {
+  position: fixed;
+  top:0;
+  width:100%;
+  z-index: 1000;
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(10px);
-  transition: all 0.5s;
+  transition: all 0.3s ease;
 }
-.navbar.scrolled{background: rgba(0,0,0,0.95);}
-.navbar a{color:var(--primary);}
-.navbar a:hover{color:var(--accent);}
 
-/* Hero */
-#hero{
-  height:100vh;
+.navbar.scrolled {
+  background: rgba(0,0,0,0.85);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.navbar a {
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+}
+
+.navbar a i {
+  transition: transform 0.3s, color 0.3s;
+}
+
+.navbar a:hover i {
+  transform: translateY(-2px);
+  color: var(--accent);
+}
+
+/* Hero Section */
+#hero {
+  text-align:center;
+  padding:80px 20px;
+  min-height:100vh;
   display:flex;
+  flex-direction: column;
+  justify-content:center;
   align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
+  color: var(--accent);
+  text-shadow: 2px 2px 12px rgba(0,0,0,0.7);
 }
-#hero::before{
-  content:"";
-  position:absolute;
-  width:200%;
-  height:200%;
-  background:linear-gradient(45deg,var(--primary),#fff,#000);
-  animation:gradientBG 20s ease infinite;
-  z-index:-1;
-}
-@keyframes gradientBG{
-  0%{transform:translate(0,0) rotate(0deg);}
-  50%{transform:translate(-50px,-50px) rotate(180deg);}
-  100%{transform:translate(0,0) rotate(360deg);}
-}
-#hero h1{
-  font-size:2.5rem;
+
+#hero h1 {
+  font-size:3rem;
   font-weight:bold;
-  color:#fff;
-  text-shadow:1px 1px 10px rgba(0,0,0,0.7);
-  animation:floatText 3s ease-in-out infinite;
-}
-@keyframes floatText{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
-}
-#hero p{
-  color:#fff;
-  font-size:1.2rem;
   margin-bottom:20px;
-  text-shadow:0 1px 6px rgba(0,0,0,0.5);
 }
-#hero .btn{
+
+#hero p {
+  font-size:1.3rem;
+  margin-bottom:30px;
+}
+
+#hero .btn {
   border-radius:50px;
   font-weight:bold;
   padding:0.7rem 1.5rem;
-  transition: transform 0.2s, box-shadow 0.3s;
-}
-#hero .btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 15px var(--primary);
-}
-
-/* Section Cards */
-.section-cards{
-  display:flex;
-  flex-wrap:wrap;
-  gap:1rem;
-  justify-content:center;
-  margin:3rem 0;
-}
-.card-custom{
-  background:#fff;
-  border:2px solid var(--primary);
-  border-radius:1rem;
-  padding:1.5rem;
-  width:250px;
-  text-align:center;
-  transition: all 0.5s;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-}
-.card-custom:hover{
-  transform:translateY(-10px) rotateX(5deg);
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
-.card-custom i{
-  font-size:2.5rem;
-  color:var(--primary);
-  margin-bottom:0.5rem;
+  transition: transform 0.2s, background 0.3s;
+  background: var(--primary);
+  color: #fff;
+  border:none;
 }
 
-/* Accordion */
-.accordion-button:not(.collapsed){
-  background: rgba(214,0,0,0.1);
-  color:var(--secondary);
+#hero .btn:hover {
+  transform: scale(1.05);
+  background: var(--accent);
+  color: #000;
 }
-.accordion-button:focus{box-shadow:none;}
 
-/* Floating buttons */
-#quickCallBtn{
-  padding:0.7rem 1.5rem;
-  font-size:1rem;
-  border-radius:50px;
-  transition:all 0.3s;
+/* Icon animation */
+.icon-bounce {
+  display:inline-block;
+  animation: bounce 2s infinite;
 }
-#quickCallBtn:hover{transform:scale(1.05);}
 
-/* Footer */
-footer{
-  background:#111;
-  color:#fff;
-  padding:3rem 1rem;
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-6px);}
+  60% {transform: translateY(-3px);}
 }
-footer a{color:var(--primary);}
-footer a:hover{color:var(--accent);}
 
-/* Fade-in */
-.fade-in{opacity:0; transform:translateY(20px); transition: all 0.8s ease;}
-.fade-in.appear{opacity:1; transform:translateY(0);}
+/* Fade-in animation */
+.fade-in {
+  opacity:0;
+  transform:translateY(20px);
+  transition: all 0.8s ease;
+}
+.fade-in.appear {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Sections */
+section {padding:60px 20px;}
+h2 {margin-bottom:40px; text-align:center; color:var(--primary);}
 </style>
 </head>
 <body>
 
-<!-- Topbar -->
-<div class="top-bar">
-  <div><i class="bi bi-clock"></i> 9:00 – 21:00</div>
-  <div class="d-flex align-items-center">
-    <i class="bi bi-telephone me-1"></i> 0942467674
-    <button class="btn btn-outline-light btn-sm">☎</button>
-  </div>
-</div>
-
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<nav class="navbar navbar-expand-lg">
   <div class="container">
-    <a class="navbar-brand text-white" href="#">Nguyễn Tú</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+    <a class="navbar-brand text-white" href="#"><i class="bi bi-bicycle icon-bounce me-2"></i>Nguyễn Tú</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navMenu">
+    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#hero">Trang Chủ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#services">Dịch Vụ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#pricing">Bảng Giá</a></li>
-        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#hero"><i class="bi bi-house-fill icon-bounce"></i> Trang Chủ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about"><i class="bi bi-info-circle-fill icon-bounce"></i> Giới Thiệu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#pricing"><i class="bi bi-cash-stack icon-bounce"></i> Bảng Giá</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq"><i class="bi bi-question-circle-fill icon-bounce"></i> FAQ</a></li>
       </ul>
     </div>
   </div>
@@ -194,65 +158,49 @@ footer a:hover{color:var(--accent);}
 
 <!-- Hero -->
 <section id="hero">
-  <h1>Thuê Xe Máy Hà Nội</h1>
-  <p>Xe mới, giá hợp lý, giao tận nơi. Thuê dài ngày hoặc theo tháng.</p>
-  <a href="#pricing" class="btn btn-primary">Thuê Ngay</a>
+  <h1>Thuê xe máy Hà Nội - Nguyễn Tú</h1>
+  <p>Cho thuê xe máy dài ngày/tháng. Xe mới, tiết kiệm xăng. Giá ưu đãi, cọc nhẹ.</p>
+  <a href="#pricing" class="btn btn-lg">Thuê Ngay</a>
 </section>
 
-<!-- Services Cards -->
-<section id="services" class="container my-5 fade-in">
-  <h2 class="text-center mb-5">Dịch Vụ Của Chúng Tôi</h2>
-  <div class="section-cards">
-    <div class="card-custom">
-      <i class="bi bi-speedometer2"></i>
-      <h5>Xe Số & Xe Ga</h5>
-      <p>Đa dạng, chất lượng cao, tiết kiệm xăng.</p>
-    </div>
-    <div class="card-custom">
-      <i class="bi bi-clock-history"></i>
-      <h5>Thuê Nhanh</h5>
-      <p>Thủ tục nhanh chóng, giao xe tận nơi.</p>
-    </div>
-    <div class="card-custom">
-      <i class="bi bi-cash-stack"></i>
-      <h5>Giá Hợp Lý</h5>
-      <p>Ưu đãi dài ngày, cọc thấp, minh bạch.</p>
-    </div>
-  </div>
+<!-- About -->
+<section id="about" class="fade-in">
+  <h2>Giới Thiệu</h2>
+  <p class="text-center">Dịch vụ cho thuê xe máy uy tín tại Hà Nội. Xe số và xe ga đa dạng, chất lượng cao, thủ tục nhanh chóng, giá hợp lý.</p>
 </section>
 
 <!-- Pricing -->
-<section id="pricing" class="container my-5 fade-in">
-  <h2 class="text-center mb-5">Bảng Giá Thuê Xe Máy</h2>
-  <div class="accordion" id="pricingAccordion">
-    <div class="accordion-item">
-      <h3 class="accordion-header" id="p1">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
-          Giá thuê 1 ngày
-        </button>
-      </h3>
-      <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
-        <div class="accordion-body">
-          Xe số: 150.000đ/ngày <br> Xe ga: 200.000đ/ngày
-        </div>
-      </div>
+<section id="pricing" class="fade-in">
+  <h2>Bảng Giá</h2>
+  <div class="row text-center">
+    <div class="col-md-4 mb-4">
+      <h5>1 Ngày</h5>
+      <p>Xe số: 150.000đ<br>Xe ga: 200.000đ</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <h5>1 Tuần</h5>
+      <p>Xe số: 600.000đ<br>Xe ga: 900.000đ</p>
+    </div>
+    <div class="col-md-4 mb-4">
+      <h5>1 Tháng</h5>
+      <p>Xe số: 1.000.000đ – 1.200.000đ<br>Xe ga: 1.200.000đ – 2.000.000đ</p>
     </div>
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="container my-5 fade-in">
-  <h2 class="text-center mb-5">Câu Hỏi Thường Gặp</h2>
+<section id="faq" class="fade-in">
+  <h2>FAQ</h2>
   <div class="accordion" id="faqAccordion">
     <div class="accordion-item">
-      <h3 class="accordion-header" id="f1">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+      <h2 class="accordion-header" id="faq1">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq1">
           Tôi cần gì để thuê xe?
         </button>
-      </h3>
-      <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+      </h2>
+      <div id="collapseFaq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
         <div class="accordion-body">
-          CCCD và đặt cọc 2 – 5 triệu đồng.
+          Căn cước công dân và đặt cọc từ 2 – 5 triệu đồng.
         </div>
       </div>
     </div>
@@ -260,31 +208,35 @@ footer a:hover{color:var(--accent);}
 </section>
 
 <!-- Footer -->
-<footer class="text-center">
-  <p>© 2025 Nguyễn Tú | <a href="#">thuexemaynguyentu.com</a></p>
+<footer class="text-center py-4" style="background:#111; color:#fff;">
+  <p>© 2025 Nguyễn Tú | Designed by thuexemaynguyentu.com</p>
 </footer>
 
+<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// Scroll navbar
-window.addEventListener('scroll',()=>{
+// Navbar scroll effect
+window.addEventListener('scroll', function(){
   const navbar = document.querySelector('.navbar');
-  if(window.scrollY>50) navbar.classList.add('scrolled');
-  else navbar.classList.remove('scrolled');
+  if(window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
 });
 
-// Fade-in
-const faders=document.querySelectorAll('.fade-in');
-const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};
-const appearOnScroll=new IntersectionObserver((entries,observer)=>{
-  entries.forEach(entry=>{
+// Fade-in effect
+const faders = document.querySelectorAll(".fade-in");
+const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
     if(entry.isIntersecting){
-      entry.target.classList.add('appear');
+      entry.target.classList.add("appear");
       observer.unobserve(entry.target);
     }
   });
-},appearOptions);
-faders.forEach(fader=>appearOnScroll.observe(fader));
+}, appearOptions);
+faders.forEach(fader => appearOnScroll.observe(fader));
 </script>
 </body>
 </html>
