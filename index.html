@@ -3,248 +3,288 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thuê Xe Máy Hà Nội | Nguyễn Tú</title>
-<meta name="description" content="Cho thuê xe máy dài ngày/tháng tại Hà Nội. Xe mới, tiết kiệm xăng, giá ưu đãi, cọc nhẹ, giao tận nơi.">
-<meta name="keywords" content="thuê xe máy Hà Nội, xe máy dài ngày, xe máy theo tháng">
+<title>Thuê Xe Máy Hà Nội - Nguyễn Tú</title>
 
 <!-- Bootstrap & Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 
 <style>
-:root {
-  --primary: #DA1E26;   /* đỏ Honda */
-  --secondary: #000;
-  --bg: #fff;
-  --accent: #FFFAF0;
+:root{
+  --primary:#d60000; /* Honda đỏ */
+  --secondary:#000;
+  --bg:#fff;
+  --accent:#fff;
 }
 
-html, body {margin:0; padding:0; font-family: Arial, sans-serif; background:#fff; color: var(--secondary);}
-body {overflow-x:hidden; scroll-behavior:smooth;}
-
-/* PARTICLE BACKGROUND */
-#hero {position:relative; overflow:hidden; height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; perspective:1000px;}
-.particle {position:absolute; border-radius:50%; opacity:0.6; animation:moveParticle 15s linear infinite;}
-@keyframes moveParticle {
-  0% {transform: translateY(0) translateX(0);}
-  50% {transform: translateY(-800px) translateX(300px);}
-  100% {transform: translateY(0) translateX(0);}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family: 'Arial', sans-serif;
+  background:#fff;
+  color: var(--secondary);
+  overflow-x:hidden;
 }
 
-/* HERO */
-#hero h1 {font-size:3rem; font-weight:bold; color: var(--primary); text-shadow:1px 1px 8px rgba(0,0,0,0.3); transform:rotateY(0deg); transition: transform 0.5s;}
-#hero p {font-size:1.2rem; margin-top:15px; color:#333;}
-#hero .btn {border-radius:50px; font-weight:bold; padding:0.7rem 2rem; background:var(--primary); color:#fff; border:none; transition:0.3s;}
-#hero .btn:hover {transform:scale(1.05); background:#fff; color:var(--primary); box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+/* Topbar */
+.top-bar{
+  background: rgba(0,0,0,0.7);
+  color: var(--accent);
+  padding:0.4rem 1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:0.9rem;
+  position:fixed;
+  width:100%;
+  z-index:1000;
+}
+.top-bar button{margin-left:5px; border-radius:20px; font-weight:bold; transition:0.3s;}
+.top-bar button:hover{transform:scale(1.1);}
 
-/* MENU */
-.navbar {background:#fff; transition:0.3s;}
-.navbar a {color: var(--secondary); font-weight:500; transition:0.3s;}
-.navbar a:hover {color: var(--primary);}
-.navbar .navbar-brand img{height:45px;}
+/* Navbar */
+.navbar{
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s;
+}
+.navbar.scrolled{background: rgba(0,0,0,0.95);}
+.navbar a{color:var(--primary);}
+.navbar a:hover{color:var(--accent);}
 
-/* Section fade-in */
-.fade-in {opacity:0; transform:translateY(20px); transition: all 0.8s ease;}
-.fade-in.appear {opacity:1; transform:translateY(0);}
+/* Hero */
+#hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+#hero::before{
+  content:"";
+  position:absolute;
+  width:200%;
+  height:200%;
+  background:linear-gradient(45deg,var(--primary),#fff,#000);
+  animation:gradientBG 20s ease infinite;
+  z-index:-1;
+}
+@keyframes gradientBG{
+  0%{transform:translate(0,0) rotate(0deg);}
+  50%{transform:translate(-50px,-50px) rotate(180deg);}
+  100%{transform:translate(0,0) rotate(360deg);}
+}
+#hero h1{
+  font-size:2.5rem;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:1px 1px 10px rgba(0,0,0,0.7);
+  animation:floatText 3s ease-in-out infinite;
+}
+@keyframes floatText{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+#hero p{
+  color:#fff;
+  font-size:1.2rem;
+  margin-bottom:20px;
+  text-shadow:0 1px 6px rgba(0,0,0,0.5);
+}
+#hero .btn{
+  border-radius:50px;
+  font-weight:bold;
+  padding:0.7rem 1.5rem;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+#hero .btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 15px var(--primary);
+}
 
-/* Card hover 3D */
-.card:hover {transform: translateY(-10px) rotateX(3deg); box-shadow:0 15px 25px rgba(0,0,0,0.2); transition:0.3s;}
+/* Section Cards */
+.section-cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem;
+  justify-content:center;
+  margin:3rem 0;
+}
+.card-custom{
+  background:#fff;
+  border:2px solid var(--primary);
+  border-radius:1rem;
+  padding:1.5rem;
+  width:250px;
+  text-align:center;
+  transition: all 0.5s;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+.card-custom:hover{
+  transform:translateY(-10px) rotateX(5deg);
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+.card-custom i{
+  font-size:2.5rem;
+  color:var(--primary);
+  margin-bottom:0.5rem;
+}
 
 /* Accordion */
-.accordion-button:not(.collapsed) {background: rgba(218,30,38,0.1); color: var(--secondary);}
-.accordion-button:focus {box-shadow:none;}
+.accordion-button:not(.collapsed){
+  background: rgba(214,0,0,0.1);
+  color:var(--secondary);
+}
+.accordion-button:focus{box-shadow:none;}
+
+/* Floating buttons */
+#quickCallBtn{
+  padding:0.7rem 1.5rem;
+  font-size:1rem;
+  border-radius:50px;
+  transition:all 0.3s;
+}
+#quickCallBtn:hover{transform:scale(1.05);}
 
 /* Footer */
-footer {background:#111; color:#fff;}
-footer a {color:var(--primary);}
-footer a:hover {color:var(--accent);}
+footer{
+  background:#111;
+  color:#fff;
+  padding:3rem 1rem;
+}
+footer a{color:var(--primary);}
+footer a:hover{color:var(--accent);}
+
+/* Fade-in */
+.fade-in{opacity:0; transform:translateY(20px); transition: all 0.8s ease;}
+.fade-in.appear{opacity:1; transform:translateY(0);}
 </style>
 </head>
 <body>
 
+<!-- Topbar -->
+<div class="top-bar">
+  <div><i class="bi bi-clock"></i> 9:00 – 21:00</div>
+  <div class="d-flex align-items-center">
+    <i class="bi bi-telephone me-1"></i> 0942467674
+    <button class="btn btn-outline-light btn-sm">☎</button>
+  </div>
+</div>
+
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="#"><img src="https://thuexemaynguyentu.com/wp-content/uploads/2025/09/cropped-Thue-xe-may-min-1-1.png" alt="Nguyễn Tú"></a>
+    <a class="navbar-brand text-white" href="#">Nguyễn Tú</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navMenu">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#hero">Trang Chủ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#about">Giới Thiệu</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Dịch Vụ</a></li>
         <li class="nav-item"><a class="nav-link" href="#pricing">Bảng Giá</a></li>
         <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-        <li class="nav-item"><a class="nav-link" href="#reviews">Đánh Giá</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Hero Section -->
+<!-- Hero -->
 <section id="hero">
-  <canvas id="particleCanvas"></canvas>
-  <div>
-    <h1>Thuê Xe Máy Hà Nội - Nguyễn Tú</h1>
-    <p>Xe mới, tiết kiệm xăng, giá ưu đãi. Giao tận nơi khi thuê dài ngày hoặc theo tháng.</p>
-    <a href="#pricing" class="btn">Thuê Ngay</a>
+  <h1>Thuê Xe Máy Hà Nội</h1>
+  <p>Xe mới, giá hợp lý, giao tận nơi. Thuê dài ngày hoặc theo tháng.</p>
+  <a href="#pricing" class="btn btn-primary">Thuê Ngay</a>
+</section>
+
+<!-- Services Cards -->
+<section id="services" class="container my-5 fade-in">
+  <h2 class="text-center mb-5">Dịch Vụ Của Chúng Tôi</h2>
+  <div class="section-cards">
+    <div class="card-custom">
+      <i class="bi bi-speedometer2"></i>
+      <h5>Xe Số & Xe Ga</h5>
+      <p>Đa dạng, chất lượng cao, tiết kiệm xăng.</p>
+    </div>
+    <div class="card-custom">
+      <i class="bi bi-clock-history"></i>
+      <h5>Thuê Nhanh</h5>
+      <p>Thủ tục nhanh chóng, giao xe tận nơi.</p>
+    </div>
+    <div class="card-custom">
+      <i class="bi bi-cash-stack"></i>
+      <h5>Giá Hợp Lý</h5>
+      <p>Ưu đãi dài ngày, cọc thấp, minh bạch.</p>
+    </div>
   </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="container py-5 fade-in">
-  <h2 class="text-center mb-5">Giới Thiệu Dịch Vụ</h2>
-  <div class="row text-center">
-    <div class="col-md-4 mb-4">
-      <i class="bi bi-speedometer2 fs-2 text-primary"></i>
-      <h3 class="h5 mt-2">Xe số & xe ga đa dạng, chất lượng</h3>
-    </div>
-    <div class="col-md-4 mb-4">
-      <i class="bi bi-clock-history fs-2 text-primary"></i>
-      <h3 class="h5 mt-2">Thủ tục thuê xe nhanh chóng</h3>
-    </div>
-    <div class="col-md-4 mb-4">
-      <i class="bi bi-cash-stack fs-2 text-primary"></i>
-      <h3 class="h5 mt-2">Giá thuê hợp lý, ưu đãi dài ngày</h3>
-    </div>
-  </div>
-</section>
-
-<!-- Pricing Section -->
+<!-- Pricing -->
 <section id="pricing" class="container my-5 fade-in">
-  <h2 class="text-center mb-5">Bảng Giá Thuê Xe Máy Hà Nội</h2>
+  <h2 class="text-center mb-5">Bảng Giá Thuê Xe Máy</h2>
   <div class="accordion" id="pricingAccordion">
     <div class="accordion-item">
-      <h3 class="accordion-header" id="price1">
+      <h3 class="accordion-header" id="p1">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
           Giá thuê 1 ngày
         </button>
       </h3>
       <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
         <div class="accordion-body">
-          <strong>Xe số:</strong> 150.000đ/ngày <br>
-          <strong>Xe ga:</strong> 200.000đ/ngày
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h3 class="accordion-header" id="price2">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-          Giá thuê 1 tuần
-        </button>
-      </h3>
-      <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#pricingAccordion">
-        <div class="accordion-body">
-          <strong>Xe số:</strong> 600.000đ <br>
-          <strong>Xe ga:</strong> 900.000đ
+          Xe số: 150.000đ/ngày <br> Xe ga: 200.000đ/ngày
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FAQ Section -->
-<section id="faq" class="container py-5 fade-in">
+<!-- FAQ -->
+<section id="faq" class="container my-5 fade-in">
   <h2 class="text-center mb-5">Câu Hỏi Thường Gặp</h2>
   <div class="accordion" id="faqAccordion">
     <div class="accordion-item">
-      <h3 class="accordion-header" id="faq1">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq1">
+      <h3 class="accordion-header" id="f1">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
           Tôi cần gì để thuê xe?
         </button>
       </h3>
-      <div id="collapseFaq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+      <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
         <div class="accordion-body">
-          <strong>Căn cước công dân</strong> và <strong>đặt cọc</strong> 2–5 triệu đồng.
+          CCCD và đặt cọc 2 – 5 triệu đồng.
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- Reviews Section -->
-<section id="reviews" class="container py-5 fade-in">
-  <h2 class="text-center mb-5">Đánh Giá Khách Hàng</h2>
-  <div class="swiper mySwiper p-3 rounded shadow-lg" style="background: rgba(255,255,255,0.9);">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide p-4 shadow rounded bg-white card">
-        <div class="text-primary mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
-        <p>Xe mới, thủ tục nhanh, rất tiện cho chuyến đi!</p>
-        <h5 class="fw-bold mb-0">Nguyễn A</h5>
-      </div>
-      <div class="swiper-slide p-4 shadow rounded bg-white card">
-        <div class="text-primary mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
-        <p>Dịch vụ tốt, giá hợp lý, có hỗ trợ giao xe.</p>
-        <h5 class="fw-bold mb-0">Trần B</h5>
-      </div>
-    </div>
-    <div class="swiper-button-next text-dark"></div>
-    <div class="swiper-button-prev text-dark"></div>
-    <div class="swiper-pagination mt-3"></div>
   </div>
 </section>
 
 <!-- Footer -->
-<footer class="footer py-5 text-center">
-  <p>© 2025 Nguyễn Tú | Designed by <a href="https://thuexemaynguyentu.com" target="_blank">thuexemaynguyentu.com</a></p>
+<footer class="text-center">
+  <p>© 2025 Nguyễn Tú | <a href="#">thuexemaynguyentu.com</a></p>
 </footer>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
-// SWIPER
-var swiper = new Swiper(".mySwiper", {
-  slidesPerView:1, spaceBetween:20, loop:true,
-  autoplay:{delay:4000, disableOnInteraction:false},
-  pagination:{el:".swiper-pagination", clickable:true},
-  navigation:{nextEl:".swiper-button-next", prevEl:".swiper-button-prev"},
-  breakpoints:{768:{slidesPerView:2}, 992:{slidesPerView:3}}
+// Scroll navbar
+window.addEventListener('scroll',()=>{
+  const navbar = document.querySelector('.navbar');
+  if(window.scrollY>50) navbar.classList.add('scrolled');
+  else navbar.classList.remove('scrolled');
 });
 
-// FADE-IN SCROLL
-const faders = document.querySelectorAll(".fade-in");
-const appearOptions = { threshold:0.2, rootMargin:"0px 0px -50px 0px"};
-const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){entry.target.classList.add("appear"); observer.unobserve(entry.target);}
+// Fade-in
+const faders=document.querySelectorAll('.fade-in');
+const appearOptions={threshold:0.2,rootMargin:"0px 0px -50px 0px"};
+const appearOnScroll=new IntersectionObserver((entries,observer)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('appear');
+      observer.unobserve(entry.target);
+    }
   });
-}, appearOptions);
-faders.forEach(fader => appearOnScroll.observe(fader));
-
-// PARTICLE CANVAS
-const canvas = document.createElement('canvas');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-canvas.style.position = 'absolute';
-canvas.style.top = '0';
-canvas.style.left = '0';
-canvas.style.zIndex = '0';
-document.getElementById('hero').appendChild(canvas);
-const ctx = canvas.getContext('2d');
-let particles = [];
-for(let i=0;i<100;i++){
-  particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*3+1, dx:(Math.random()-0.5)*1, dy:(Math.random()-0.5)*1});
-}
-function animateParticles(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(218,30,38,0.5)';
-    ctx.fill();
-    p.x += p.dx;
-    p.y += p.dy;
-    if(p.x>canvas.width) p.x=0;
-    if(p.x<0) p.x=canvas.width;
-    if(p.y>canvas.height) p.y=0;
-    if(p.y<0) p.y=canvas.height;
-  });
-  requestAnimationFrame(animateParticles);
-}
-animateParticles();
-window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+},appearOptions);
+faders.forEach(fader=>appearOnScroll.observe(fader));
 </script>
 </body>
 </html>
