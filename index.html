@@ -4,28 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Thuê Xe Máy Hà Nội - Nguyễn Tú</title>
-
-<!-- Bootstrap & Icons & Swiper -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 
 <style>
 :root {
-  --primary: #D6001C; /* Honda Red */
-  --secondary: #000;
-  --bg: #fff;
-  --accent: #fff;
-  --hover: #FF3C3C;
+  --primary:#D6001C; /* Honda Red */
+  --secondary:#000; 
+  --bg:#fff; 
+  --accent:#fff;
+  --hover:#FF3C3C;
 }
 
-/* Reset */
 * {box-sizing:border-box; margin:0; padding:0;}
-body {font-family: Arial, sans-serif; background:#fff; color:var(--secondary); overflow-x:hidden; scroll-behavior: smooth;}
+body {font-family: Arial, sans-serif; background:#fff; color:var(--secondary); overflow-x:hidden;}
 
-/* Sidebar vertical */
+/* Sidebar desktop */
 #sidebar {
-  position: fixed; top:0; left:0; bottom:0;
+  position: fixed;
+  left:0; top:0; bottom:0;
   width:70px; background:var(--primary);
   display:flex; flex-direction:column; align-items:center;
   padding-top:20px; z-index:1000;
@@ -36,57 +34,62 @@ body {font-family: Arial, sans-serif; background:#fff; color:var(--secondary); o
 }
 #sidebar .nav-icon:hover {transform: rotate(15deg) scale(1.2); color:var(--hover);}
 
-/* Offcanvas menu for mobile */
-.offcanvas-body a {display:block; margin:10px 0; font-weight:bold; color:var(--secondary); text-decoration:none;}
-.offcanvas-body a:hover {color:var(--primary); transform:scale(1.05); transition:0.3s;}
+/* Hamburger mobile */
+#mobileMenuBtn {
+  display:none;
+  position:fixed; top:15px; left:15px; font-size:1.8rem; color:var(--primary); z-index:1100; cursor:pointer;
+  transition: transform 0.3s;
+}
+#mobileMenuBtn:hover {transform:rotate(20deg) scale(1.2);}
+
+/* Offcanvas mobile menu */
+#mobileMenu {
+  position:fixed; top:0; left:-250px; width:250px; height:100%; background:var(--primary);
+  display:flex; flex-direction:column; padding-top:70px; transition:0.3s; z-index:1050;
+}
+#mobileMenu.active {left:0;}
+#mobileMenu .menu-item {padding:15px 20px; color:var(--accent); font-weight:bold; cursor:pointer; display:flex; align-items:center; transition: transform 0.3s, color 0.3s;}
+#mobileMenu .menu-item i {margin-right:10px;}
+#mobileMenu .menu-item:hover {color:var(--hover); transform:scale(1.05);}
 
 /* Hero */
-#hero {
-  margin-left:70px; text-align:center; padding:100px 20px;
-  background: linear-gradient(135deg,#D6001C,#FF0000,#fff,#000);
-  background-size: 400% 400%; animation: gradientBG 15s ease infinite; color:var(--accent);
-}
+#hero {margin-left:70px; text-align:center; padding:80px 20px; 
+background: linear-gradient(135deg,#D6001C,#FF0000,#fff,#000);
+background-size: 400% 400%; animation: gradientBG 15s ease infinite; color:var(--accent);}
 @keyframes gradientBG {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-#hero h1 {font-size:3rem; font-weight:bold; text-shadow:2px 2px 10px rgba(0,0,0,0.5);}
-#hero p {font-size:1.2rem; margin:20px 0; text-shadow:1px 1px 6px rgba(0,0,0,0.4);}
-#hero .btn {border-radius:50px; padding:0.7rem 1.5rem; font-weight:bold; background:var(--accent); color:var(--primary);}
-#hero .btn:hover {background:var(--hover); color:#fff; transform:scale(1.05); transition:0.3s;}
+#hero h1{font-size:3rem; font-weight:bold; text-shadow:2px 2px 10px rgba(0,0,0,0.5);}
+#hero p{font-size:1.2rem; margin:20px 0; text-shadow:1px 1px 6px rgba(0,0,0,0.4);}
+#hero .btn{border-radius:50px; padding:0.7rem 1.5rem; font-weight:bold; background:var(--accent); color:var(--primary);}
+#hero .btn:hover{background:var(--hover); color:#fff; transform:scale(1.05); transition:0.3s;}
 
-/* Sections */
+/* Section */
 section {padding:60px 20px; margin-left:70px;}
-.fade-in {opacity:0; transform:translateY(20px); transition: all 0.8s ease;}
-.fade-in.appear {opacity:1; transform:translateY(0);}
-
-/* About Icons */
-.about-icon {font-size:2rem; color:var(--primary); transition: transform 0.3s;}
-.about-icon:hover {transform:scale(1.3) rotate(-10deg); color:var(--hover);}
-
-/* Swiper Review */
-.swiper-slide {background:#fff; border:2px solid var(--primary); border-radius:10px; padding:20px; margin:10px; color:#000; transition: transform 0.3s;}
-.swiper-slide:hover {transform:translateY(-5px) scale(1.02);}
-.swiper-slide h5 {margin-top:10px; color:var(--primary);}
-.swiper-button-next, .swiper-button-prev {color:var(--primary);}
+.fade-in{opacity:0; transform:translateY(20px); transition: all 0.8s ease;}
+.fade-in.appear{opacity:1; transform:translateY(0);}
 
 /* Footer */
-footer {
-  background:#111; color:var(--accent); padding:40px 20px; text-align:center;
-}
-footer a {color:var(--accent); text-decoration:none; transition: color 0.3s;}
-footer a:hover {color:var(--hover);}
+footer {background:#111; color:var(--accent); padding:40px 20px; margin-left:70px; text-align:center;}
+footer a{color:var(--accent); text-decoration:none; transition:color 0.3s;}
+footer a:hover{color:var(--hover);}
 footer .social-icon {font-size:1.5rem; margin:0 10px; transition: transform 0.3s, color 0.3s;}
 footer .social-icon:hover {transform:scale(1.3) rotate(-10deg); color:var(--hover);}
 
+/* Swiper Reviews */
+.swiper-slide {background:#fff; border:2px solid var(--primary); border-radius:10px; padding:20px; margin:10px; color:#000;}
+.swiper-slide h5 {margin-top:10px; color:var(--primary);}
+
 /* Responsive adjustments */
-@media (max-width:768px){
-  #sidebar {display:none;}
-  section {margin-left:0; padding:60px 15px;}
-  #hero {padding:80px 15px;}
+@media(max-width:768px){
+  #sidebar{display:none;}
+  #mobileMenuBtn{display:block;}
+  section{margin-left:0;}
+  footer{margin-left:0;}
 }
 </style>
 </head>
 <body>
 
-<!-- Sidebar -->
+<!-- Sidebar desktop -->
 <div id="sidebar">
   <i class="bi bi-house-door nav-icon" onclick="scrollToSection('hero')" title="Trang Chủ"></i>
   <i class="bi bi-info-circle nav-icon" onclick="scrollToSection('about')" title="Giới Thiệu"></i>
@@ -95,22 +98,16 @@ footer .social-icon:hover {transform:scale(1.3) rotate(-10deg); color:var(--hove
   <i class="bi bi-star nav-icon" onclick="scrollToSection('reviews')" title="Đánh Giá"></i>
 </div>
 
-<!-- Offcanvas Mobile Menu -->
-<button class="btn btn-primary d-md-none m-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
-  <i class="bi bi-list"></i>
-</button>
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title">Menu</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-  </div>
-  <div class="offcanvas-body">
-    <a href="#hero">Trang Chủ</a>
-    <a href="#about">Giới Thiệu</a>
-    <a href="#pricing">Bảng Giá</a>
-    <a href="#faq">FAQ</a>
-    <a href="#reviews">Đánh Giá</a>
-  </div>
+<!-- Hamburger mobile -->
+<i class="bi bi-list" id="mobileMenuBtn" onclick="toggleMobileMenu()"></i>
+
+<!-- Mobile offcanvas menu -->
+<div id="mobileMenu">
+  <div class="menu-item" onclick="scrollToSection('hero')"><i class="bi bi-house-door"></i> Trang Chủ</div>
+  <div class="menu-item" onclick="scrollToSection('about')"><i class="bi bi-info-circle"></i> Giới Thiệu</div>
+  <div class="menu-item" onclick="scrollToSection('pricing')"><i class="bi bi-cash-stack"></i> Bảng Giá</div>
+  <div class="menu-item" onclick="scrollToSection('faq')"><i class="bi bi-question-circle"></i> FAQ</div>
+  <div class="menu-item" onclick="scrollToSection('reviews')"><i class="bi bi-star"></i> Đánh Giá</div>
 </div>
 
 <!-- Hero -->
@@ -121,21 +118,12 @@ footer .social-icon:hover {transform:scale(1.3) rotate(-10deg); color:var(--hove
 </section>
 
 <!-- About -->
-<section id="about" class="fade-in text-center">
+<section id="about" class="fade-in">
 <h2>Giới Thiệu Dịch Vụ</h2>
-<div class="row mt-4">
-  <div class="col-md-4 mb-4">
-    <i class="bi bi-speedometer2 about-icon"></i>
-    <p>Xe số & xe ga đa dạng, chất lượng</p>
-  </div>
-  <div class="col-md-4 mb-4">
-    <i class="bi bi-clock-history about-icon"></i>
-    <p>Thủ tục thuê xe nhanh chóng</p>
-  </div>
-  <div class="col-md-4 mb-4">
-    <i class="bi bi-cash-stack about-icon"></i>
-    <p>Giá thuê hợp lý, ưu đãi dài ngày</p>
-  </div>
+<div class="row text-center mt-4">
+  <div class="col-md-4 mb-4"><i class="bi bi-speedometer2 fs-2 text-danger"></i><p>Xe số & xe ga đa dạng, chất lượng</p></div>
+  <div class="col-md-4 mb-4"><i class="bi bi-clock-history fs-2 text-danger"></i><p>Thủ tục thuê xe nhanh chóng</p></div>
+  <div class="col-md-4 mb-4"><i class="bi bi-cash-stack fs-2 text-danger"></i><p>Giá thuê hợp lý, ưu đãi dài ngày</p></div>
 </div>
 </section>
 
@@ -168,18 +156,12 @@ footer .social-icon:hover {transform:scale(1.3) rotate(-10deg); color:var(--hove
 <div class="swiper mySwiper p-3">
   <div class="swiper-wrapper">
     <div class="swiper-slide">
-      <div class="text-warning mb-2">
-        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-      </div>
+      <div class="text-warning mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
       <p>Xe mới, thủ tục nhanh, rất tiện cho chuyến đi!</p>
       <h5>Nguyễn A</h5>
     </div>
     <div class="swiper-slide">
-      <div class="text-warning mb-2">
-        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
-      </div>
+      <div class="text-warning mb-2"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
       <p>Dịch vụ tốt, giá hợp lý, có hỗ trợ giao xe.</p>
       <h5>Trần B</h5>
     </div>
@@ -200,16 +182,22 @@ footer .social-icon:hover {transform:scale(1.3) rotate(-10deg); color:var(--hove
 </div>
 </footer>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
 // Scroll to section
 function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  // Close mobile menu if open
+  if(window.innerWidth <= 768) document.getElementById('mobileMenu').classList.remove('active');
 }
 
-// Swiper init
+// Mobile menu toggle
+function toggleMobileMenu(){
+  document.getElementById('mobileMenu').classList.toggle('active');
+}
+
+// Swiper
 var swiper = new Swiper(".mySwiper",{
   slidesPerView:1,
   spaceBetween:20,
@@ -222,13 +210,10 @@ var swiper = new Swiper(".mySwiper",{
 
 // Fade-in sections
 const faders = document.querySelectorAll(".fade-in");
-const appearOptions = {threshold:0.2, rootMargin:"0px 0px -50px 0px"};
+const appearOptions = { threshold:0.2, rootMargin:"0px 0px -50px 0px" };
 const appearOnScroll = new IntersectionObserver((entries,observer)=>{
   entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("appear");
-      observer.unobserve(entry.target);
-    }
+    if(entry.isIntersecting){entry.target.classList.add("appear");observer.unobserve(entry.target);}
   });
 }, appearOptions);
 faders.forEach(fader=>appearOnScroll.observe(fader));
